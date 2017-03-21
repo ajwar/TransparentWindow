@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -29,23 +30,23 @@ import static ru.yandex.ajwar.transparent.util.Constant.*;
 /**
  * Created by Ajwar on 28.02.17.
  */
-public class CustomWindowController implements Initializable{
+public class TransparentWindowController implements Initializable{
 
     private static double yStage = 0;
     //private static double heightImg=0;
     private Stage primaryStage;
     private MainApp mainApp;
-    protected Delta prevSize;
-    protected Delta prevPos;
-    protected boolean maximised;
-    private boolean snapped;
+    private Scene primaryScene;
+    private Node primaryNode;
+    //protected Delta prevSize;
+    //protected Delta prevPos;
+    //protected boolean maximised;
+    //private boolean snapped;
 
     @FXML
     private AnchorPane mainPane;
     @FXML
     private AnchorPane pane;
-    @FXML
-    private BorderPane testBorderPane;
     @FXML
     private ImageView mainImg;
     @FXML
@@ -73,12 +74,18 @@ public class CustomWindowController implements Initializable{
     @FXML
     private Pane bottomRightPane;
 
-    public CustomWindowController(){
-            prevSize = new Delta();
-            prevPos = new Delta();
-            maximised = false;
-            snapped = false;
+    public TransparentWindowController(Stage appStage, Node appNode){
+        this.primaryStage=appStage;
+        this.primaryNode=appNode;
+            //prevSize = new Delta();
+            //prevPos = new Delta();
+            //maximised = false;
+            //snapped = false;
     }
+
+    public TransparentWindowController() {
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setResizeControl(leftPane, "left");
@@ -90,17 +97,17 @@ public class CustomWindowController implements Initializable{
         setResizeControl(bottomLeftPane, "bottom-left");
         setResizeControl(bottomRightPane, "bottom-right");
         //System.out.println(bottomPane.isPickOnBounds());
-        mainPane.setBackground(null);
+        //mainPane.setBackground(null);
         //Platform.runLater(()->System.out.println(testBorderPane.getBackground().isEmpty()));
         //mainPane.setPickOnBounds(false);
         //System.out.println(topPane.isPickOnBounds());
         //testBorderPane.setStyle("-fx-background-color: #cb1a33;");
         //Platform.runLater(()->System.out.println(testBorderPane.getBackground().isEmpty()));
        // topPane.setPickOnBounds(false);
-        Platform.runLater(()-> {
+        /*Platform.runLater(()-> {
             testBorderPane.setPickOnBounds(false);
             //anchorPane.setPickOnBounds(false);
-        });
+        });*/
         /*topPane.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -132,9 +139,9 @@ public class CustomWindowController implements Initializable{
             restoreImg.setVisible(false);
             AnchorPane.setTopAnchor(pane,SIZE_IMAGE_HALF);
             AnchorPane.setTopAnchor(pane,SIZE_IMAGE_HALF);
-            AnchorPane.setTopAnchor(topLeftPane,0.0D);
-            AnchorPane.setTopAnchor(topPane,0.0D);
-            AnchorPane.setTopAnchor(topRightPane,0.0D);
+            AnchorPane.setTopAnchor(topLeftPane,SIZE_IMAGE_HALF);
+            AnchorPane.setTopAnchor(topPane,SIZE_IMAGE_HALF);
+            AnchorPane.setTopAnchor(topRightPane,SIZE_IMAGE_HALF);
             primaryStage.setMaximized(false);
             if (primaryStage.getY()<-SIZE_IMAGE_HALF ) AnchorPane.setTopAnchor(mainImg,SIZE_IMAGE_HALF);
             else if (primaryStage.getY()>SIZE_IMAGE_HALF){
@@ -164,7 +171,7 @@ public class CustomWindowController implements Initializable{
     }
     protected void setMoveControl(final Node node) {
         final Delta delta = new Delta();
-        final Delta eventSource = new Delta();
+        //final Delta eventSource = new Delta();
 
         // Record drag deltas on press.
         node.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -173,8 +180,8 @@ public class CustomWindowController implements Initializable{
                     delta.x = mouseEvent.getX();
                     if (!primaryStage.isMaximized()) delta.y = mouseEvent.getY()+SIZE_IMAGE_HALF;
                         else delta.y = mouseEvent.getY();
-                    eventSource.x = mouseEvent.getScreenX();
-                    eventSource.y = node.prefHeight(primaryStage.getHeight());
+                    //eventSource.x = mouseEvent.getScreenX();
+                    //eventSource.y = node.prefHeight(primaryStage.getHeight());
                 }
                 mouseEvent.consume();
             }
@@ -244,18 +251,18 @@ public class CustomWindowController implements Initializable{
 
                     // Vertical resize.
                     if (direction.startsWith("top")) {
-                        if (snapped) {
+                        /*if (snapped) {
                             primaryStage.setHeight(prevSize.y);
                             snapped = false;
-                        } else if ((height > primaryStage.getMinHeight()) || (mouseEvent.getY() < 0)) {
+                        } else*/ if ((height > primaryStage.getMinHeight()) || (mouseEvent.getY() < 0)) {
                             primaryStage.setHeight(height - mouseEvent.getScreenY() + primaryStage.getY());
                             primaryStage.setY(mouseEvent.getScreenY());
                         }
                     } else if (direction.startsWith("bottom")) {
-                        if (snapped) {
+                        /*if (snapped) {
                             primaryStage.setY(prevPos.y);
                             snapped = false;
-                        } else if ((height > primaryStage.getMinHeight()) || (mouseEvent.getY() > 0)) {
+                        } else */if ((height > primaryStage.getMinHeight()) || (mouseEvent.getY() > 0)) {
                             primaryStage.setHeight(height + mouseEvent.getY());
                         }
                     }
@@ -266,7 +273,7 @@ public class CustomWindowController implements Initializable{
         });
 
         // Record application height and y position.
-        pane.setOnMousePressed(new EventHandler<MouseEvent>() {
+       /* pane.setOnMousePressed(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
                 if ((mouseEvent.isPrimaryButtonDown()) && (!snapped)) {
                     prevSize.y = primaryStage.getHeight();
@@ -274,7 +281,7 @@ public class CustomWindowController implements Initializable{
                 }
                 mouseEvent.consume();
             }
-        });
+        });*/
 
         // Aero Snap Resize.
         /*pane.setOnMouseReleased(new EventHandler<MouseEvent>() {
@@ -416,4 +423,6 @@ public class CustomWindowController implements Initializable{
     public void setPane(AnchorPane pane) {
         this.pane = pane;
     }
+
+
 }

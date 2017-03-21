@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import ru.yandex.ajwar.transparent.views.CustomWindowController;
+import ru.yandex.ajwar.transparent.views.TransparentWindowController;
 
 
 import java.io.IOException;
@@ -18,9 +18,9 @@ import java.io.IOException;
  */
 public class MainApp extends Application {
 
-    private Stage primaryStage;
+    private static Stage primaryStage;
     private AnchorPane anchorPane;
-    private CustomWindowController mainWindowController;
+    private TransparentWindowController mainWindowController;
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage=primaryStage;
@@ -30,18 +30,19 @@ public class MainApp extends Application {
         //scene.setMoveControl(mainWindowController.getPane());
         //(//(AnchorPane)scene.getRoot()).setBackground(Background.EMPTY);
         //scene.setFill(Color.TRANSPARENT);
-       // Platform.runLater(()->System.out.println(primaryStage.getOwner()));
-        primaryStage.show();
+        //Platform.runLater(()->System.out.println(primaryStage.getOwner()));
+        show();
+        //primaryStage.show();
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         launch(args);
-    }
+    }*/
     private void initMainWindow() {
         try {
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("views/CustomWindows.fxml"));
-            primaryStage.getIcons().add(new Image(MainApp.class.getResourceAsStream("/images/IcoMainWindowNew.png")));
+            loader.setLocation(MainApp.class.getResource("views/TransparentWindow.fxml"));
+            //primaryStage.getIcons().add(new Image(MainApp.class.getResourceAsStream("/images/IcoMainWindowNew.png")));
             this.anchorPane =(AnchorPane)loader.load();
             //this.anchorPane.setBackground(Background.EMPTY);
             Scene scene=new Scene(this.anchorPane, Color.TRANSPARENT);
@@ -50,7 +51,7 @@ public class MainApp extends Application {
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
             primaryStage.initStyle(StageStyle.TRANSPARENT);
-            primaryStage.setOnCloseRequest(event -> System.exit(0));
+            //primaryStage.setOnCloseRequest(event -> System.exit(0));
             mainWindowController=loader.getController();
             mainWindowController.setMainApp(this);
             mainWindowController.setPrimaryStage(primaryStage);
@@ -63,6 +64,10 @@ public class MainApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public Stage show(){
+        primaryStage.show();
+        return primaryStage;
     }
 
     public Stage getPrimaryStage() {
