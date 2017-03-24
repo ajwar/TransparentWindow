@@ -16,22 +16,23 @@ import java.io.IOException;
 /**
  * Created by Ajwar on 28.02.17.
  */
-public class MainApp extends Application {
+public class MainApp /*extends Application*/ {
 
     private static Stage primaryStage;
     private AnchorPane anchorPane;
     private TransparentWindowController mainWindowController;
-    @Override
+    /*@Override*/
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage=primaryStage;
         initMainWindow();
+        TransparentHelper.setMainApp(this);
         //BorderlessScene scene=new BorderlessScene(primaryStage,anchorPane);
         //primaryStage.setScene(scene);
         //scene.setMoveControl(mainWindowController.getPane());
         //(//(AnchorPane)scene.getRoot()).setBackground(Background.EMPTY);
         //scene.setFill(Color.TRANSPARENT);
         //Platform.runLater(()->System.out.println(primaryStage.getOwner()));
-        show();
+        //show();
         //primaryStage.show();
     }
 
@@ -65,16 +66,17 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-    public Stage show(){
-        primaryStage.show();
+    public Stage getInstanceStage() throws Exception {
+        Stage stage=new Stage();
+        this.start(stage);
         return primaryStage;
     }
 
-    public Stage getPrimaryStage() {
+    public static Stage getPrimaryStage() {
         return primaryStage;
     }
 
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    public static void setPrimaryStage(Stage primaryStage) {
+        MainApp.primaryStage = primaryStage;
     }
 }
