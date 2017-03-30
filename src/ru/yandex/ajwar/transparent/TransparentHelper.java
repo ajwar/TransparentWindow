@@ -1,5 +1,6 @@
 package ru.yandex.ajwar.transparent;
 
+import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.stage.StageHelper;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -36,6 +37,8 @@ public class TransparentHelper{
     public static void main(String[] args) throws Exception {
         TransparentHelper.createAndConfigureExecutorsLoadService();
         mainApp=new MainApp();
+        /**Два способа запуска JavaFx приложения,если они не запущены*/
+        PlatformImpl.startup(()->{});
         new JFXPanel();
         //Application.launch(MainApp.class);
         Platform.runLater(() -> {
