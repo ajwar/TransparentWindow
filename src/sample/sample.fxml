@@ -1,8 +1,29 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <CheckBox layoutX="227.0" layoutY="150.0" mnemonicParsing="false" text="CheckBox" />
+      <ColorPicker layoutX="165.0" layoutY="248.0" />
+      <RadioButton layoutX="462.0" layoutY="108.0" mnemonicParsing="false" text="RadioButton" />
+      <ProgressIndicator layoutX="129.0" layoutY="56.0" progress="0.0" />
+      <TableView layoutX="349.0" layoutY="148.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <AnchorPane layoutY="200.0" prefHeight="200.0" prefWidth="139.0">
+         <children>
+            <AnchorPane layoutX="26.0" layoutY="24.0" prefHeight="89.0" prefWidth="87.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

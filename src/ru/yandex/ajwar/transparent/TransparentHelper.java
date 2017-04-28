@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 public class TransparentHelper{
     private static MainApp mainApp;
     private static ExecutorService executorServiceLoad;
+    private static Stage primaryStage;
 
     public static void addTransparent(Stage appStage, Node appNode) throws Exception {
        // appStage=
@@ -39,7 +40,7 @@ public class TransparentHelper{
         mainApp=new MainApp();
         /**Два способа запуска JavaFx приложения,если они не запущены*/
         PlatformImpl.startup(()->{});
-        new JFXPanel();
+        //new JFXPanel();
         //Application.launch(MainApp.class);
         Platform.runLater(() -> {
             try {
@@ -52,7 +53,20 @@ public class TransparentHelper{
         while (mainApp==null){
             Thread.currentThread().sleep(100);
         }
+        System.out.println(Platform.isImplicitExit());
+        Platform.setImplicitExit(false);
         System.out.println(mainApp);
+        Platform.runLater(()->{
+            primaryStage=mainApp.getPrimaryStage();
+
+            //mainApp.getPrimaryStage().show();
+        });
+        while (primaryStage==null){
+            Thread.currentThread().sleep(100);
+        }
+        primaryStage.show();
+        System.out.println(primaryStage);
+
         /*MainApp app=new MainApp();
         Stage stage=StageBuilder.create().build();*/
 
