@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,7 +11,7 @@
    <children>
       <AnchorPane fx:id="pane" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="16.0">
          <children>
-            <ImageView fx:id="maxImg" fitHeight="16.0" fitWidth="16.0" layoutX="694.0" layoutY="10.0" onMouseClicked="#maximize" pickOnBounds="true" preserveRatio="true" styleClass="my-image-max" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="0.0">
+            <ImageView fx:id="maxImg" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#maximize" pickOnBounds="true" preserveRatio="true" styleClass="my-image-max" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../../../../resource/images/Maximize_Window-32.png" />
                </image>
@@ -21,16 +20,13 @@
                <image>
                   <Image url="@../../../../../resource/images/Restore_Window-32.png" />
                </image>
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
             </ImageView>
-            <ImageView fx:id="closeImg" fitHeight="16.0" fitWidth="16.0" layoutX="694.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" styleClass="my-image-close" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ImageView fx:id="closeImg" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="my-image-close" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../../../../resource/images/Close_Window-32.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="minImg" fitHeight="16.0" fitWidth="16.0" layoutX="704.0" layoutY="20.0" onMouseClicked="#minimize" pickOnBounds="true" preserveRatio="true" styleClass="my-image-min" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="0.0">
+            <ImageView fx:id="minImg" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#minimize" pickOnBounds="true" preserveRatio="true" styleClass="my-image-min" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../../../../resource/images/Minimize_Window-32.png" />
                </image>
