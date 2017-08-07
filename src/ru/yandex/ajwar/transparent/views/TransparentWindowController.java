@@ -16,14 +16,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import ru.yandex.ajwar.transparent.MainApp;
+import ru.yandex.ajwar.transparent.TransparentHelper;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import static ru.yandex.ajwar.transparent.util.Constant.*;
 
 
@@ -35,7 +35,7 @@ public class TransparentWindowController implements Initializable{
     private static double yStage = 0;
     //private static double heightImg=0;
     private Stage primaryStage;
-    private MainApp mainApp;
+    private TransparentHelper transparentHelper;
     private Scene primaryScene;
     private Node primaryNode;
     //protected Delta prevSize;
@@ -118,7 +118,7 @@ public class TransparentWindowController implements Initializable{
         //Platform.runLater(this::listenerPrimaryStageMousePressedAndDragged);
         //Platform.runLater(()->EffectUtilities.makeDraggable(primaryStage,pane));
         //Platform.runLater(()->UndecoratedHelper.makeDraggable(primaryStage,pane));
-        pane.setStyle("-fx-background-color: #2d56cb;");
+        //pane.setStyle("-fx-background-color: #2d56cb;");
         //heightImg=mainImg.getFitHeight();
         listenerImageViewAll();
         setMoveControl(pane);
@@ -171,8 +171,7 @@ public class TransparentWindowController implements Initializable{
     }
     protected void setMoveControl(final Node node) {
         final Delta delta = new Delta();
-        //final Delta eventSource = new Delta();
-
+        //node.setPickOnBounds(true);
         // Record drag deltas on press.
         node.setOnMousePressed(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
@@ -224,12 +223,12 @@ public class TransparentWindowController implements Initializable{
         bottomLeftPane.setDisable(!bool);
         bottomRightPane.setDisable(!bool);
     }
-    public MainApp getMainApp() {
-        return mainApp;
+    public TransparentHelper getTransparentHelper() {
+        return transparentHelper;
     }
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
+    public void setTransparentHelper(TransparentHelper transparentHelper) {
+        this.transparentHelper = transparentHelper;
     }
     private void setResizeControl(Pane pane, final String direction) {
         pane.setOnMouseDragged(new EventHandler<MouseEvent>() {
@@ -237,34 +236,38 @@ public class TransparentWindowController implements Initializable{
                 if (mouseEvent.isPrimaryButtonDown()) {
                     double width = primaryStage.getWidth();
                     double height = primaryStage.getHeight();
-
                     // Horizontal resize.
                     if (direction.endsWith("left")) {
-                        if ((width > primaryStage.getMinWidth()) || (mouseEvent.getX() < 0)) {
-                            primaryStage.setWidth(width - mouseEvent.getScreenX() + primaryStage.getX());
+                        width=width - mouseEvent.getScreenX() + primaryStage.getX();
+                        if (width>primaryStage.getMinWidth()) {
+                            primaryStage.setWidth(width);
                             primaryStage.setX(mouseEvent.getScreenX());
+                        }else {
+                            width=primaryStage.getWidth();
+                            primaryStage.setWidth(primaryStage.getMinWidth());
+                            primaryStage.setX(primaryStage.getX()+width-primaryStage.getMinWidth());
                         }
-                    } else if ((direction.endsWith("right"))
-                            && ((width > primaryStage.getMinWidth()) || (mouseEvent.getX() > 0))) {
-                        primaryStage.setWidth(width + mouseEvent.getX());
+                    } else if (direction.endsWith("right")) {
+                        width=width + mouseEvent.getX();
+                        if (width>primaryStage.getMinWidth()) primaryStage.setWidth(width);
+                        else primaryStage.setWidth(primaryStage.getMinWidth());
                     }
 
                     // Vertical resize.
                     if (direction.startsWith("top")) {
-                        /*if (snapped) {
-                            primaryStage.setHeight(prevSize.y);
-                            snapped = false;
-                        } else*/ if ((height > primaryStage.getMinHeight()) || (mouseEvent.getY() < 0)) {
-                            primaryStage.setHeight(height - mouseEvent.getScreenY() + primaryStage.getY());
+                        height=height - mouseEvent.getScreenY() + primaryStage.getY();
+                        if (height > primaryStage.getMinHeight()) {
+                            primaryStage.setHeight(height);
                             primaryStage.setY(mouseEvent.getScreenY());
+                        }else {
+                            height=primaryStage.getHeight();
+                            primaryStage.setHeight(primaryStage.getMinHeight());
+                            primaryStage.setY(primaryStage.getY()+height-primaryStage.getMinHeight());
                         }
                     } else if (direction.startsWith("bottom")) {
-                        /*if (snapped) {
-                            primaryStage.setY(prevPos.y);
-                            snapped = false;
-                        } else */if ((height > primaryStage.getMinHeight()) || (mouseEvent.getY() > 0)) {
-                            primaryStage.setHeight(height + mouseEvent.getY());
-                        }
+                        height=height + mouseEvent.getY();
+                        if (height > primaryStage.getMinHeight()) primaryStage.setHeight(height);
+                        else primaryStage.setHeight(primaryStage.getMinHeight());
                     }
                 }
                 mouseEvent.consume();

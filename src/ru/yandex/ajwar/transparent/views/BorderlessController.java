@@ -78,7 +78,7 @@ public class BorderlessController {
 	 * @param primaryStage the main application stage.
 	 *//*
 
-	protected void setMainApp(Stage primaryStage) {
+	protected void setTransparentHelper(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 	}
 

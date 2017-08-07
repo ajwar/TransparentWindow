@@ -69,7 +69,7 @@ public class BorderlessScene extends Scene {
 		*/
 /*FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Borderless.fxml"));
-		this.controller.setMainApp(primaryStage);
+		this.controller.setTransparentHelper(primaryStage);
 		this.primaryStage = primaryStage;*//*
 
 		*/
@@ -84,7 +84,7 @@ public class BorderlessScene extends Scene {
 			this.setFill(Color.TRANSPARENT);
 
 			this.controller = ((BorderlessController) loader.getController());
-			this.controller.setMainApp(primaryStage);
+			this.controller.setTransparentHelper(primaryStage);
 
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			this.primaryStage = primaryStage;

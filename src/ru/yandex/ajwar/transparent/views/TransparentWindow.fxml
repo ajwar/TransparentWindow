@@ -8,16 +8,16 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 
-<AnchorPane fx:id="mainPane" minHeight="400.0" minWidth="700.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.yandex.ajwar.transparent.views.TransparentWindowController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.yandex.ajwar.transparent.views.TransparentWindowController">
    <children>
-      <AnchorPane fx:id="pane" layoutY="16.0" maxHeight="16.0" minHeight="16.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="16.0">
+      <AnchorPane fx:id="pane" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="16.0">
          <children>
             <ImageView fx:id="maxImg" fitHeight="16.0" fitWidth="16.0" layoutX="694.0" layoutY="10.0" onMouseClicked="#maximize" pickOnBounds="true" preserveRatio="true" styleClass="my-image-max" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../../../../resource/images/Maximize_Window-32.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="restoreImg" fitHeight="15" fitWidth="15" onMouseClicked="#maximize" pickOnBounds="true" preserveRatio="true" styleClass="my-image-restore" visible="false" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="0.0">
+            <ImageView fx:id="restoreImg" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#maximize" pickOnBounds="true" preserveRatio="true" styleClass="my-image-restore" visible="false" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../../../../resource/images/Restore_Window-32.png" />
                </image>
@@ -77,7 +77,7 @@
                <Cursor fx:constant="N_RESIZE" />
            </cursor>
        </Pane>
-       <Pane fx:id="bottomPane" layoutX="10.0" layoutY="395.0" maxHeight="5.0" opacity="0.0" prefHeight="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+       <Pane fx:id="bottomPane" layoutX="10.0" layoutY="395.0" opacity="0.0" prefHeight="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
            <cursor>
                <Cursor fx:constant="S_RESIZE" />
            </cursor>

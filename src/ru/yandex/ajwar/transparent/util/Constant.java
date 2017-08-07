@@ -1,5 +1,6 @@
 package ru.yandex.ajwar.transparent.util;
 
+
 /**
  * Created by Ajwar on 16.03.2017.
  */
